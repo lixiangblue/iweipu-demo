@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="iweipu-service:war">
+    <output-path>$PROJECT_DIR$/iweipu-service/target</output-path>
+    <root id="archive" name="iweipu-service.war">
+      <element id="artifact" artifact-name="iweipu-service:war exploded" />
+    </root>
+  </artifact>
+</component>
