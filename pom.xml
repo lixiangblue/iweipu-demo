@@ -28,5 +28,16 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>PipeWork Releases</name>
+            <url>http://192.168.183.130:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>PipeWork Snapshots</name>
+            <url>http://192.168.183.130 :8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

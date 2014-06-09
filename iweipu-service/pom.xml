@@ -9,7 +9,6 @@
     <artifactId>iweipu-service</artifactId>
     <packaging>war</packaging>
     <name>iweipu-service Maven Webapp</name>
-    <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -32,11 +31,35 @@
         <dependency>
             <groupId>com.pipework</groupId>
             <artifactId>iweipu-framework</artifactId>
-            <version>1.0</version>
+            <version>0.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.pipework</groupId>
+            <artifactId>iweipu-model</artifactId>
+            <version>0.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.pipework</groupId>
+            <artifactId>iweipu-api</artifactId>
+            <version>0.1-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
     </dependencies>
     <build>
         <finalName>iweipu-service</finalName>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>PipeWork Releases</name>
+            <url>http://192.168.183.130:8081/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>PipeWork Snapshots</name>
+            <url>http://192.168.183.130 :8081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
