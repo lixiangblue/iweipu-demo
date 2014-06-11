@@ -47,9 +47,7 @@
             <type>jar</type>
         </dependency>
     </dependencies>
-    <build>
-        <finalName>iweipu-service</finalName>
-    </build>
+
     <distributionManagement>
         <repository>
             <id>releases</id>
@@ -62,4 +60,37 @@
             <url>http://192.168.183.130 :8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <id>tomcat-run</id>
+                        <goals>
+                            <goal>exec-war-only</goal>
+                        </goals>
+                        <phase>package</phase>
+                       <!-- <configuration>
+                            <warRunDependencies>
+                                <warRunDependency>
+                                    <dependency>
+                                        <groupId>cmsi</groupId>
+                                        <artifactId>cmsi</artifactId>
+                                        <version>1.0-SNAPSHOT</version>
+                                        <type>war</type>
+                                    </dependency>
+                                    <contextPath>/</contextPath>
+                                </warRunDependency>
+                            </warRunDependencies>
+                            <enableNaming>true</enableNaming>
+                        </configuration>-->
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

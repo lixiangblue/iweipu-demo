@@ -54,14 +54,14 @@
 	</bean>
 	
 	<!-- Freemarker配置，参考： http://www.cnblogs.com/hoojo/archive/2011/04/19/2020551.html-->
-	<bean id="freemarkerConfig"
+	<!--<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<!-- 视图资源位置 -->
+		&lt;!&ndash; 视图资源位置 &ndash;&gt;
 		<property name="templateLoaderPath" value="/WEB-INF/ftl/" />
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="freemarkerSettings">
 			<props>
-				<prop key="template_update_delay">0</prop><!-- 模板更新延时 -->
+				<prop key="template_update_delay">0</prop>&lt;!&ndash; 模板更新延时 &ndash;&gt;
 				<prop key="locale">zh_CN</prop>
 				<prop key="default_encoding">UTF-8</prop>
 				<prop key="output_encoding">UTF-8</prop>
@@ -72,7 +72,7 @@
 		        <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
 			</props>
 		</property>
-		<!-- 全局变量部分 -->
+		&lt;!&ndash; 全局变量部分 &ndash;&gt;
 		<property name="freemarkerVariables">
 			<map>
 				<entry key="BasePath" value="${web.basepath}" />
@@ -81,17 +81,17 @@
 		</property>
 	</bean>
 	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
-	<!-- 配置freeMarker视图解析器 -->
+	&lt;!&ndash; 配置freeMarker视图解析器 &ndash;&gt;
 	<bean id="ftlviewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
-		<!-- 如果配置了这个节点，则视图必须是ftl，redirect等前缀都失效了 -->
-		<!-- <property name="viewNames" value="*.ftl"/> -->
+		&lt;!&ndash; 如果配置了这个节点，则视图必须是ftl，redirect等前缀都失效了 &ndash;&gt;
+		&lt;!&ndash; <property name="viewNames" value="*.ftl"/> &ndash;&gt;
 		<property name="contentType" value="text/html;charset=UTF-8" />
 		<property name="cache" value="true" />
 		<property name="prefix" value="" />
 		<property name="suffix" value="" />
 	</bean>
-	
+	-->
 	<bean id="sqlSessionFactoryAuthorityCorba" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 配置了自动扫描，mybatis-config.xml实际没有用了 -->
 		<!-- <property name="configLocation" value="classpath:mybatis-config.xml" /> -->
@@ -103,18 +103,18 @@
 		<property name="basePackage" value="com/shopyp/commodity/mapper" />
 	</bean>
 	
-	<beans profile="production">
+	<!--<beans profile="production">
 		<bean id="dataSourceAuthorityCorba" class="org.springframework.jndi.JndiObjectFactoryBean">
 			<property name="jndiName" value="java:/MySqlDS_JDBC" />
 		</bean>
-	</beans>
-    <beans profile="dev">
+	</beans>-->
+
 	    <bean id="dataSourceAuthorityCorba" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 		    <property name="url" value="jdbc:mysql://192.168.1.11:3306/commodity?characterEncoding=utf-8"/>
 		    <property name="username" value="root"/>
 		    <property name="password" value="root"/>
 	    </bean>
-    </beans>
+
     
 </beans>
