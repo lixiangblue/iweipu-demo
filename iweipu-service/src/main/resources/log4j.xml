@@ -30,20 +30,20 @@
 		<priority value="debug" />
 	</category>
 	<category name="com.ibatis">
-		<priority value="error" />
+		<priority value="DEBUG" />
 	</category>
 	<logger name="org">
-		<level value="ERROR" />
+		<level value="DEBUG" />
 	</logger>
 	<logger name="net">
-		<level value="ERROR" />
+		<level value="DEBUG" />
 	</logger>
-	<category name="com.shopyp" additivity="false">
-		<priority value="INFO" />
+	<category name="com.pipework" additivity="false">
+		<priority value="DEBUG" />
 		<appender-ref ref="dailyRolling" />
 	</category>
 	<root>
-		<level value="ERROR" />
+		<level value="DEBUG" />
 		<appender-ref ref="console" />
 		<appender-ref ref="dailyRolling" />
 	</root>
