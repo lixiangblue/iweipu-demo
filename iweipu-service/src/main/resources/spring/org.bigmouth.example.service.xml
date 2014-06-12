@@ -2,12 +2,12 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 	<!-- Admin -->
-	<bean id="adminDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<!--<bean id="adminDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 		<property name="mapperInterface" value="org.bigmouth.example.dao.AdminDao" />
 	</bean>
 	
 	<bean id="adminService" class="org.bigmouth.example.service.AdminService">
 		<property name="adminDao" ref="adminDao" />
-	</bean>
+	</bean>-->
 </beans>

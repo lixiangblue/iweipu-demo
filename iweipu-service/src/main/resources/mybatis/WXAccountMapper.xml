@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.pipework.platform.mapper.WXAccountMapper">
+
+    <!--<select id="selectByCriteria" parameterType="api.iweipu.beans.Criteria" resultType="api.iweipu.vehicle.pojo.VehicleUser">
+        <include refid="common.Mysql_Pagination_Head" />
+        Select * from  ${schema}account wx_account
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+        <include refid="common.Mysql_Pagination_Tail" />
+    </select>-->
+
+    <!--添加分店-->
+    <insert id="insertAccount" parameterType="integer" useGeneratedKeys="true" keyProperty="account_id">
+        insert into  ${schema}account(account,password,father_id,token)
+        values(#{account},#{password},#{father_id},#{token})
+    </insert>
+
+    <select id="countByCriteria" parameterType="integer" resultType="int">
+        Select count(*) from  ${schema}account wx_account
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <select id="selectByCriteria" resultType="integer">
+        Select account_id,account,password,token,salt,php_password,createtime from  ${schema}account wx_account
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <!-- 批量删除 -->
+    <delete id="deleteBatchByIds" parameterType="java.lang.Integer">
+        DELETE FROM  ${schema}account WHERE account_id IN
+        <foreach collection="array" item="ids" index="index" open="(" close=")" separator=",">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <sql id="Example_Where_Clause" >
+        <trim prefix="where" prefixOverrides="and|or" >
+            <if test="condition.password != null" >
+               and  wx_account.php_password= #{condition.password}
+            </if>
+            <if test="condition.token != null" >
+                and  wx_account.token= #{condition.token}
+            </if>
+            <if test="condition.account_id != null" >
+                and  wx_account.account_id= #{condition.account_id}
+            </if>
+            <if test="condition.account != null" >
+                and  wx_account.account= #{condition.account}
+            </if>
+            <!--<if test="condition.telNo != null" >
+                <![CDATA[ and b.TELNO = #{condition.telNo} ]]>
+            </if>
+            <if test="condition.users != null" >
+                and b.UID in
+                <foreach collection="condition.users" item="item" index="index" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>-->
+        </trim>
+    </sql>
+</mapper>
