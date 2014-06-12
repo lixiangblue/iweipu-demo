@@ -9,4 +9,8 @@ import com.pipework.api.account.IAccountService;
  * Time: 上午10:57
  */
 public class AccountServiceImpl implements IAccountService {
+    @Override
+    public String sayHello(String name) {
+      return name+"say hello";
+    }
 }

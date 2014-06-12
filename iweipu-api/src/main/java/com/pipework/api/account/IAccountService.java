@@ -7,4 +7,5 @@ package com.pipework.api.account;
  * Time: 下午3:30
  */
 public interface IAccountService {
+    String sayHello(String name);
 }

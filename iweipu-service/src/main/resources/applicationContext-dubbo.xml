@@ -18,9 +18,9 @@
 	<!-- 到这里调用 -->
 	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address.client}" id="zookeeperClient" />
 
-  <!--  &lt;!&ndash; 调用dubbo接口 &ndash;&gt;
-    <dubbo:reference id="authorityBaseApiService" interface="com.pipework.platform.api.impl.AccountServiceImpl"
-                     check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo"/>-->
+    <!-- 调用dubbo接口 -->
+    <dubbo:reference id="accountApiService" interface="com.pipework.api.account.IAccountService"
+                     check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo"/>
 
     <!-- 用dubbo协议在20800端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20810" dispather="all" threadpool="cached" threads="5000"/>
