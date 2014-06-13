@@ -1,10 +1,5 @@
 import com.pipework.api.account.IAccountService;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.pipework.framework.core.SpringContextHolder;
-import org.springframework.context.ApplicationContext;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
@@ -19,11 +14,11 @@ import java.util.List;
 public class TestDubbo {
     public static void main(String[] args)throws Exception {
 
-        ClassPathXmlApplicationContext context =new ClassPathXmlApplicationContext(new String[] {"applicationContext-dubbo.xml"});
+        ClassPathXmlApplicationContext context =new ClassPathXmlApplicationContext(new String[] {"customer.xml"});
 
         context.start();
 
-        IAccountService demoService = (IAccountService)context.getBean("accountService");// 获取远程服务代理
+        IAccountService demoService = (IAccountService)context.getBean("accountApiService");// 获取远程服务代理
 
         String hello = demoService.sayHello("world");// 执行远程方法
 

@@ -16,16 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class HomeController {
-    private IAccountService iAccountService;
-    @Autowired
-    public void setUserDao(@Qualifier("accountApiService") IAccountService iAccountService) {
-        this.iAccountService = iAccountService;
-    }
+
     @RequestMapping("/index")
     public ModelAndView index()
     {
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.addObject("name", iAccountService.sayHello("name"));
+
         modelAndView.setViewName("index");
         return modelAndView;
 
