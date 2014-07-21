@@ -10,7 +10,8 @@
         <module>iweipu-api</module>
         <module>iweipu-service</module>
         <module>iweipu-framework</module>
-        <module>iweipu-consumer</module>
+        <module>iweipu-provider</module>
+        <!-- <module>iweipu-consumer</module>-->
     </modules>
     <packaging>pom</packaging>
 

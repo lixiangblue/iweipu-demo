@@ -9,26 +9,30 @@
     <description>Dubbo provider配置</description>
 
     <!-- 提供方应用信息，用于计算依赖关系 -->
-
-    ++++
-
-
+    <dubbo:application name="iweipu-client" />
     <!-- 使用zookeeper注册中心暴露服务地址 -->
-    <!-- 注册到这里 -->
+   <!-- &lt;!&ndash; 注册到这里 &ndash;&gt;
 	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" id="zookeeperService" />
+   --> <!-- 到这里调用 -->
+    <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address.client}" id="zookeeperClient" />
+
+    <!-- 调用dubbo接口 -->
+    <dubbo:reference id="accountService" interface="com.pipework.api.account.IAccountService"
+                     check="false" version="1.0" url="" registry="zookeeperClient"  protocol="dubbo"/>
 
 
-    <!-- 用dubbo协议在20800端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20810" dispather="all" threadpool="cached" threads="5000"/>
-    <dubbo:service interface="com.pipework.api.account.IAccountService" ref="accountService"
-                   version="1.0" registry="zookeeperService" owner="iweipu"/>
- 
+
+    <!-- &lt;!&ndash; 用dubbo协议在20800端口暴露服务 &ndash;&gt;
+     <dubbo:protocol name="dubbo" port="20810" dispather="all" threadpool="cached" threads="5000"/>
+     <dubbo:service interface="com.pipework.api.account.IAccountService" ref="accountService"
+                    version="1.0" registry="zookeeperService" owner="iweipu"/>
+  -->
     <!-- 和本地bean一样实现服务 -->
-    <bean id="accountService" class="com.pipework.platform.api.impl.AccountServiceImpl"/>
+  <!--  <bean id="accountService" class="com.pipework.platform.api.impl.AccountServiceImpl"/>-->
                          
     <!--提供hessian，用于跨语言支持:jboss端口 contextpath，必须和包启动的上下文根+servelt的路径一致-->
-    <dubbo:protocol name="hessian" contextpath="iweipu/hessian" port="20910" server="servlet" threadpool="cached"
+    <!--<dubbo:protocol name="hessian" contextpath="iweipu/hessian" port="20910" server="servlet" threadpool="cached"
                     threads="5000"/>
 
-
+-->
 </beans>
