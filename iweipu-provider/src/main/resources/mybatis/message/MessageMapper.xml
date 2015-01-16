@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pipework.usercenter.client.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.pipework.model.usercenter.message.Message" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dialog_id" property="dialogId" jdbcType="INTEGER" />
+    <result column="sender_uid" property="senderUid" jdbcType="INTEGER" />
+    <result column="recipient_uid" property="recipientUid" jdbcType="INTEGER" />
+    <result column="is_read" property="isRead" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pipework.model.usercenter.message.Message" extends="BaseResultMap" >
+    <result column="message_text" property="messageText" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, dialog_id, sender_uid, recipient_uid, is_read, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    message_text
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pipework.model.usercenter.message.Message" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pipework.model.usercenter.message.Message" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pipework.model.usercenter.message.Message" >
+    delete from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pipework.model.usercenter.message.Message" >
+    insert into message (id, dialog_id, sender_uid, 
+      recipient_uid, is_read, create_time, 
+      message_text)
+    values (#{id,jdbcType=INTEGER}, #{dialogId,jdbcType=INTEGER}, #{senderUid,jdbcType=INTEGER}, 
+      #{recipientUid,jdbcType=INTEGER}, #{isRead,jdbcType=BIT}, #{createTime,jdbcType=INTEGER}, 
+      #{messageText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pipework.model.usercenter.message.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dialogId != null" >
+        dialog_id,
+      </if>
+      <if test="senderUid != null" >
+        sender_uid,
+      </if>
+      <if test="recipientUid != null" >
+        recipient_uid,
+      </if>
+      <if test="isRead != null" >
+        is_read,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="messageText != null" >
+        message_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dialogId != null" >
+        #{dialogId,jdbcType=INTEGER},
+      </if>
+      <if test="senderUid != null" >
+        #{senderUid,jdbcType=INTEGER},
+      </if>
+      <if test="recipientUid != null" >
+        #{recipientUid,jdbcType=INTEGER},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="messageText != null" >
+        #{messageText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pipework.model.usercenter.message.Message" resultType="java.lang.Integer" >
+    select count(*) from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update message
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dialogId != null" >
+        dialog_id = #{record.dialogId,jdbcType=INTEGER},
+      </if>
+      <if test="record.senderUid != null" >
+        sender_uid = #{record.senderUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.recipientUid != null" >
+        recipient_uid = #{record.recipientUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isRead != null" >
+        is_read = #{record.isRead,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.messageText != null" >
+        message_text = #{record.messageText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update message
+    set id = #{record.id,jdbcType=INTEGER},
+      dialog_id = #{record.dialogId,jdbcType=INTEGER},
+      sender_uid = #{record.senderUid,jdbcType=INTEGER},
+      recipient_uid = #{record.recipientUid,jdbcType=INTEGER},
+      is_read = #{record.isRead,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=INTEGER},
+      message_text = #{record.messageText,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update message
+    set id = #{record.id,jdbcType=INTEGER},
+      dialog_id = #{record.dialogId,jdbcType=INTEGER},
+      sender_uid = #{record.senderUid,jdbcType=INTEGER},
+      recipient_uid = #{record.recipientUid,jdbcType=INTEGER},
+      is_read = #{record.isRead,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pipework.model.usercenter.message.Message" >
+    update message
+    <set >
+      <if test="dialogId != null" >
+        dialog_id = #{dialogId,jdbcType=INTEGER},
+      </if>
+      <if test="senderUid != null" >
+        sender_uid = #{senderUid,jdbcType=INTEGER},
+      </if>
+      <if test="recipientUid != null" >
+        recipient_uid = #{recipientUid,jdbcType=INTEGER},
+      </if>
+      <if test="isRead != null" >
+        is_read = #{isRead,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="messageText != null" >
+        message_text = #{messageText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pipework.model.usercenter.message.Message" >
+    update message
+    set dialog_id = #{dialogId,jdbcType=INTEGER},
+      sender_uid = #{senderUid,jdbcType=INTEGER},
+      recipient_uid = #{recipientUid,jdbcType=INTEGER},
+      is_read = #{isRead,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=INTEGER},
+      message_text = #{messageText,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pipework.model.usercenter.message.Message" >
+    update message
+    set dialog_id = #{dialogId,jdbcType=INTEGER},
+      sender_uid = #{senderUid,jdbcType=INTEGER},
+      recipient_uid = #{recipientUid,jdbcType=INTEGER},
+      is_read = #{isRead,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
